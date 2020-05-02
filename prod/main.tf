@@ -133,6 +133,12 @@ resource "aws_instance" "web" {
   # In this case, we just install nginx and start it. By default,
   # this should be on port 80
   provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = "ubuntu"
+      private_key = var.private_key
+    }
+
     inline = [
       "sudo apt-get -y update",
       "sudo apt-get -y install nginx",
