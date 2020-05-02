@@ -17,3 +17,7 @@ variable "gcp_account" {
 variable "gcp_public_key" {
   default = ""
 }
+
+variable "gcp_ssh_key_username" {
+  default = ""
+}
