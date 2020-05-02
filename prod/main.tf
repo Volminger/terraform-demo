@@ -111,7 +111,6 @@ resource "aws_instance" "web" {
     host = self.public_ip
     type     = "ssh"
     private_key = var.private_key
-    password    = var.private_key_password
   }
 
   instance_type = "t3a.micro"
