@@ -1,7 +1,7 @@
 provider "google" {
   project = var.gcp_project_key
   region  = var.gcp_region
-  zone    = var.gcp_account
+  zone    = var.gcp_zone
   credentials = var.gcp_account
 }
 
