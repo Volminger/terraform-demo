@@ -10,7 +10,7 @@ resource "google_compute_instance" "vm_instance" {
   machine_type = "f1-micro"
 
   metadata {
-    ssh-keys = var.gcp_ssh_key_username:var.gcp_public_key
+    ssh-keys = "${var.gcp_ssh_key_username}:${var.gcp_public_key}"
   }
 
   boot_disk {
