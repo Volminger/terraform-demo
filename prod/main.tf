@@ -1,6 +1,6 @@
 # Specify the provider and access details
 provider "aws" {
-  region = "${var.aws_region}"
+  region = var.aws_region
 }
 
 # Create a VPC to launch our instances into
@@ -98,8 +98,8 @@ resource "aws_elb" "web" {
 }
 
 resource "aws_key_pair" "auth" {
-  key_name   = "${var.key_name}"
-  public_key = "${var.public_key}"
+  key_name   = var.key_name
+  public_key = var.public_key
 }
 
 resource "aws_instance" "web" {
