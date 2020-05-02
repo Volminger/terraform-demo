@@ -3,11 +3,15 @@ variable "public_key" {
 }
 
 variable "private_key" {
-  
+
 }
 
 variable "key_name" {
   description = "Desired name of AWS key pair"
+}
+
+variable "private_key_password" {
+  
 }
 
 variable "aws_region" {

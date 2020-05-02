@@ -109,7 +109,9 @@ resource "aws_instance" "web" {
     # The default username for our AMI
     user = "ubuntu"
     host = self.public_ip
-    # The connection will use the local SSH agent for authentication.
+    type     = "ssh"
+    private_key = var.private_key
+    password    = var.private_key_password
   }
 
   instance_type = "t3a.micro"
@@ -133,11 +135,6 @@ resource "aws_instance" "web" {
   # In this case, we just install nginx and start it. By default,
   # this should be on port 80
   provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "ubuntu"
-      private_key = var.private_key
-    }
 
     inline = [
       "sudo apt-get -y update",
