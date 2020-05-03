@@ -71,6 +71,35 @@ resource "stackpath_compute_workload" "traefik-lb" {
   }
 }
 
+resource "stackpath_compute_network_policy" "web-server" {
+  name        = "Allow HTTP traffic for web servers"
+  slug        = "web-servers-allow-http"
+  description = "A network policy for allowing HTTP access for instances with the web server role"
+  priority    = 20000
+
+  instance_selector {
+    key      = "role"
+    operator = "in"
+    values   = ["web-server"]
+  }
+
+  policy_types = ["INGRESS"]
+ingress {
+  action      = "ALLOW"
+  description = "Allow port 80 traffic from all IPs"
+  protocol {
+    tcp {
+      destination_ports = [80]
+    }
+  }
+  from {
+    ip_block {
+      cidr = "0.0.0.0/0"
+    }
+  }
+}
+}
+
 output "traefik-anycast-ip" {
   value = replace(lookup(stackpath_compute_workload.traefik-lb.annotations, "anycast.platform.stackpath.net/subnets", ""), "/32", "")
 }
