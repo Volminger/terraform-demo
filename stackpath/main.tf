@@ -13,6 +13,7 @@ resource "stackpath_compute_workload" "traefik-lb" {
     "anycast.platform.stackpath.net" = "true"
   }
 
+
   network_interface {
     network = "default"
   }
@@ -77,7 +78,7 @@ resource "stackpath_compute_network_policy" "web-server" {
   description = "A network policy for allowing HTTP access for instances with the web server role"
 
   instance_selector {
-    key      = "role"
+    key      = "workload.platform.stackpath.net/workload-slug"
     operator = "in"
     values   = ["traefik-lb"]
   }
