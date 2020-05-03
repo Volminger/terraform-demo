@@ -30,10 +30,10 @@ resource "stackpath_compute_workload" "traefik-lb" {
       value = "http://terraform-example-elb-655058968.us-west-2.elb.amazonaws.com/"
     }
 
-    env {
-      key   = "BACKEND_2"
-      value = "http://${digitalocean_droplet.instance_1.ipv4_address}"
-    }
+  #  env {
+  #    key   = "BACKEND_2"
+  #    value = "http://${digitalocean_droplet.instance_1.ipv4_address}"
+  #  }
   }
 
   target {
