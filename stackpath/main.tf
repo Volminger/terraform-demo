@@ -29,15 +29,7 @@ resource "stackpath_compute_workload" "traefik-lb" {
         "memory" = "2Gi"
       }
     }
-    # Deploy these 1 to 2 instances in Dallas, TX, USA and Amsterdam, NL.
-    deployment_scope = "cityCode"
-    selector {
-      key      = "cityCode"
-      operator = "in"
-      values   = [
-        "DFW", "AMS"
-      ]
-    }
+
 
     env {
       key   = "BACKEND_1"
@@ -53,13 +45,22 @@ resource "stackpath_compute_workload" "traefik-lb" {
   target {
     name         = "us"
     min_replicas = 1
-    max_replicas = 2
+    max_replicas = 1
     scale_settings {
       metrics {
         metric = "cpu"
         # scale up when CPU averages 50%
         average_utilization = 50
       }
+    }
+    # Deploy these one instances in Amsterdam, NL.
+    deployment_scope = "cityCode"
+    selector {
+      key      = "cityCode"
+      operator = "in"
+      values   = [
+        "AMS"
+      ]
     }
   }
 }
