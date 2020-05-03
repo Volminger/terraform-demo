@@ -13,7 +13,7 @@ resource "digitalocean_droplet" "www-1" {
 
     image = "ubuntu-18-04-x64"
     name = "www-1"
-    region = "nyc2"
+    region = "LON1"
     size = "512mb"
     ssh_keys = [
       var.ssh_public_key
