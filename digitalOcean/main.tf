@@ -7,7 +7,7 @@ resource "digitalocean_droplet" "www-1" {
       user = "root"
       type = "ssh"
       private_key = var.ssh_private_key
-      host = self.public_ip
+      host = self.ipv4_address
       timeout = "2m"
     }
 
