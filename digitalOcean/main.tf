@@ -11,7 +11,7 @@ resource "digitalocean_droplet" "www-1" {
       timeout = "2m"
     }
 
-    image = "ubuntu-14-04-x64"
+    image = "ubuntu-18-04-x64"
     name = "www-1"
     region = "nyc2"
     size = "512mb"
