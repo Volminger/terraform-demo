@@ -64,7 +64,7 @@ resource "aws_instance" "web" {
 
   key_name = aws_key_pair.auth.id
 
-  subnet_id         = [aws_subnet.terraform_demo.id]
+  subnet_id         = aws_subnet.terraform_demo.id
   security_groups = [aws_security_group.terraform_demo.id]
 
 
