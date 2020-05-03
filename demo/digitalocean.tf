@@ -13,7 +13,7 @@ resource "digitalocean_droplet" "instance_1" {
     }
 
     image = "ubuntu-18-04-x64"
-    name = "instance_1"
+    name = "instance-1"
     region = "LON1"
     size = "512mb"
     ssh_keys = [digitalocean_ssh_key.default.fingerprint]
