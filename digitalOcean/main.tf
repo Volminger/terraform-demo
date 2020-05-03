@@ -26,5 +26,4 @@ resource "digitalocean_droplet" "www-1" {
         "sudo apt-get -y install nginx"
       ]
     }
-  }
 }
