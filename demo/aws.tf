@@ -58,7 +58,7 @@ resource "aws_key_pair" "auth" {
   public_key = var.aws_ssh_public_key
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "terraform_demo" {
   connection {
     user = "ubuntu"
     host = self.public_ip
