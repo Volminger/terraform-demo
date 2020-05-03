@@ -28,33 +28,12 @@ resource "digitalocean_droplet" "www-1" {
         # install nginx
         "sudo apt-get update",
         "sudo apt-get -y install nginx",
-        cat <<EOF > /var/www/html/index.html
+        cat /var/www/html/index.html,
         <!DOCTYPE html>
         <html>
         <head>
           <title>Digital Ocean</title>
           <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-          <style>
-            html, body {
-              background: #000;
-              height: 100%;
-              width: 100%;
-              padding: 0;
-              margin: 0;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex-flow: column;
-            }
-            img { width: 250px; }
-            svg { padding: 0 40px; }
-            p {
-              color: #fff;
-              font-family: 'Courier New', Courier, monospace;
-              text-align: center;
-              padding: 10px 30px;
-            }
-          </style>
         </head>
         <body>
           <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDigitalOcean&psig=AOvVaw1u5RaZkciJkLdWiPTXq3dI&ust=1588601536984000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCv-4Twl-kCFQAAAAAdAAAAABAD">
@@ -62,7 +41,6 @@ resource "digitalocean_droplet" "www-1" {
         </body>
         </html>
         EOF
-        EOT
       ]
     }
 }
