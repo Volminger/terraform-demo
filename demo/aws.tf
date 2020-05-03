@@ -5,7 +5,7 @@ resource "aws_vpc" "terraform_demo" {
 
 # Create an internet gateway to give our subnet access to the outside world
 resource "aws_internet_gateway" "terraform_demo" {
-  vpc_id = aws_vpc.default.id
+  vpc_id = aws_vpc.terraform_demo.id
 }
 
 # Grant the VPC internet access on its main route table
@@ -17,7 +17,7 @@ resource "aws_route" "internet_access" {
 
 # Create a subnet to launch our instances into
 resource "aws_subnet" "terraform_demo" {
-  vpc_id                  = aws_vpc.default.id
+  vpc_id                  = aws_vpc.terraform_demo.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 }
@@ -64,7 +64,7 @@ resource "aws_instance" "web" {
 
   key_name = aws_key_pair.auth.id
 
-  subnets         = [aws_subnet.default.id]
+  subnets         = [aws_subnet.terraform_demo.id]
   security_groups = [aws_security_group.terraform_demo.id]
 
 
