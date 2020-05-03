@@ -75,7 +75,6 @@ resource "stackpath_compute_network_policy" "web-server" {
   name        = "Allow HTTP traffic for web servers"
   slug        = "web-servers-allow-http"
   description = "A network policy for allowing HTTP access for instances with the web server role"
-  priority    = 20000
 
   instance_selector {
     key      = "role"
@@ -84,33 +83,33 @@ resource "stackpath_compute_network_policy" "web-server" {
   }
 
 
-    priority     = 100
-    policy_types = ["INGRESS", "EGRESS"]
+  priority     = 100
+  policy_types = ["INGRESS", "EGRESS"]
 
-    # Allow all inbound connections destined for port 80
-    ingress {
-      description = "Allow all outbound connections on both TCP and UDP"
-      action      = "ALLOW"
-      protocol {
-        tcp_udp {
-          destination_ports = [80]
-        }
-      }
-      from {
-        ip_block {
-          cidr = "0.0.0.0/0"
-        }
+  # Allow all inbound connections destined for port 80
+  ingress {
+    description = "Allow all outbound connections on both TCP and UDP"
+    action      = "ALLOW"
+    protocol {
+      tcp_udp {
+        destination_ports = [80]
       }
     }
-
-    # Allows all outbound connections to 0.0.0.0/0
-    egress {
-      description = "Allow all outbound connections on both TCP and UDP"
-      action      = "ALLOW"
-      to {
-        ip_block {
-          cidr = "0.0.0.0/0"
-        }
+    from {
+      ip_block {
+        cidr = "0.0.0.0/0"
       }
-}
+    }
+  }
+
+  # Allows all outbound connections to 0.0.0.0/0
+  egress {
+    description = "Allow all outbound connections on both TCP and UDP"
+    action      = "ALLOW"
+    to {
+      ip_block {
+        cidr = "0.0.0.0/0"
+      }
+    }
+  }
 }
