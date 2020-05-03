@@ -2,6 +2,11 @@ provider "digitalocean" {
   token = var.digitalOcean-token
 }
 
+resource "digitalocean_ssh_key" "demoKey" {
+  name       = "Terraform Demo"
+  public_key = var.ssh_public_key
+}
+
 resource "digitalocean_droplet" "www-1" {
     connection {
       user = "root"
@@ -15,9 +20,7 @@ resource "digitalocean_droplet" "www-1" {
     name = "www-1"
     region = "LON1"
     size = "512mb"
-    ssh_keys = [
-      var.ssh_public_key
-    ]
+    ssh_keys = [digitalocean_ssh_key.demoKey.fingerprint]
 
     provisioner "remote-exec" {
       inline = [
