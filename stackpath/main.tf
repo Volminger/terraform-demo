@@ -29,6 +29,15 @@ resource "stackpath_compute_workload" "traefik-lb" {
         "memory" = "2Gi"
       }
     }
+    # Deploy these 1 to 2 instances in Dallas, TX, USA and Amsterdam, NL.
+    deployment_scope = "cityCode"
+    selector {
+      key      = "cityCode"
+      operator = "in"
+      values   = [
+        "DFW", "AMS"
+      ]
+    }
 
     env {
       key   = "BACKEND_1"
