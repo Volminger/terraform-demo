@@ -113,6 +113,54 @@ resource "aws_instance" "web" {
     private_key = var.private_key
   }
 
+  user_data     = <<EOT
+#cloud-config
+# update apt on boot
+package_update: true
+# install nginx
+packages:
+- nginx
+write_files:
+- content: |
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>StackPath - Amazon Web Services Instance</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <style>
+      html, body {
+        background: #000;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+      }
+      img { width: 250px; }
+      svg { padding: 0 40px; }
+      p {
+        color: #fff;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        padding: 10px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="https://www.stackpath.com/content/images/logo-and-branding/stackpath-logo-standard-screen.svg">
+    <p>This request was proxied from <strong>Amazon Web Services</strong></p>
+  </body>
+  </html>
+
+path: /usr/share/app/index.html
+permissions: '0644'
+runcmd:
+- cp /usr/share/app/index.html /usr/share/nginx/html/index.html
+EOT
+
   instance_type = "t3a.micro"
 
   # Lookup the correct AMI based on the region
@@ -130,15 +178,5 @@ resource "aws_instance" "web" {
   # backend instances.
   subnet_id = aws_subnet.default.id
 
-  # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
-  provisioner "remote-exec" {
 
-    inline = [
-      "sudo apt-get -y update",
-      "sudo apt-get -y install nginx",
-      "sudo service nginx start",
-    ]
-  }
 }
