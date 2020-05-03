@@ -113,8 +113,6 @@ resource "aws_instance" "web" {
     private_key = var.private_key
   }
 
-  user_data     = <<EOT
-
   instance_type = "t3a.micro"
 
   # Lookup the correct AMI based on the region
