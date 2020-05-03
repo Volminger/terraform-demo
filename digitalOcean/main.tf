@@ -27,7 +27,7 @@ resource "digitalocean_droplet" "www-1" {
         "export PATH=$PATH:/usr/bin",
         # install nginx
         "sudo apt-get update",
-        "sudo apt-get -y install nginx"
+        "sudo apt-get -y install nginx",
         cat <<EOF > /var/www/html/index.html
         <!DOCTYPE html>
         <html>
