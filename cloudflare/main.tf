@@ -1,7 +1,7 @@
 provider "cloudflare" {
   version = "~> 2.0"
   email   = var.cloudflare_email
-  api_token = var.cloudflare_api_token
+  api_key = var.cloudflare_api_key
 }
 
 resource "cloudflare_load_balancer" "bar" {
