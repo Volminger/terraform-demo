@@ -82,7 +82,7 @@ resource "aws_instance" "terraform_demo" {
       "sudo apt-get -y update",
       "sudo apt-get -y install nginx",
       "sudo service nginx start",
-      "curl https://github.com/Volminger/terraform-demo/tree/master/demo/aws_instance_index.html -o index.html",
+      "curl https://raw.githubusercontent.com/Volminger/terraform-demo/master/demo/aws_instance_index.html -o index.html",
       "sudo cp index.html /var/www/html/index.html"
     ]
   }

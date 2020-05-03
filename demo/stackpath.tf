@@ -8,15 +8,9 @@ resource "stackpath_compute_workload" "traefik-lb" {
   }
 
   container {
-    # Name that should be given to the container
     name = "app"
     # Nginx image to use for the container
     image = "scotwells/multi-cloud-traefik:latest"
-    # Override the command that's used to execute
-    # the container. If this option is not provided
-    # the default entrypoint and command defined
-    # by the docker image will be used.
-    # command = []
     resources {
       requests = {
         "cpu"    = "1"
