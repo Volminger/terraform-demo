@@ -1,5 +1,5 @@
 provider "stackpath" {
-  stack         = var.stackpath_stack
+  stack_id         = var.stackpath_stack
   client_id     = var.stackpath_client_id
   client_secret = var.stackpath_api_client_secret
 }
