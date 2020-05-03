@@ -5,12 +5,8 @@ provider "cloudflare" {
 }
 
 
-variable "domain" {
-  default = "example.com"
-}
-
 resource "cloudflare_record" "www" {
-  domain  = "${var.domain}"
+  domain  = "terraform-demo-example.com"
   name    = "www"
   value   = "203.0.113.10"
   type    = "A"
