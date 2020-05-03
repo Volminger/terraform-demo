@@ -7,7 +7,7 @@ resource "digitalocean_droplet" "instance_1" {
     connection {
       user = "root"
       type = "ssh"
-      #private_key = var.aws_ssh_private_key
+      private_key = var.aws_ssh_private_key
       host = self.ipv4_address
       timeout = "2m"
     }
