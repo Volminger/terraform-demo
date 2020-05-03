@@ -30,10 +30,10 @@ resource "stackpath_compute_workload" "traefik-lb" {
       value = "http://${aws_instance.terraform_demo.public_ip}/"
     }
 
-  #  env {
-  #    key   = "BACKEND_2"
-  #    value = "http://${digitalocean_droplet.instance_1.ipv4_address}"
-  #  }
+    env {
+      key   = "BACKEND_2"
+      value = "http://${digitalocean_droplet.instance_1.ipv4_address}"
+    }
   }
 
   target {
