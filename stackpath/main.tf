@@ -8,11 +8,6 @@ resource "stackpath_compute_workload" "traefik-lb" {
   name = "traefik-lb"
   slug = "traefik-lb"
 
-  annotations = {
-    # request an anycast IP for a workload
-    "anycast.platform.stackpath.net" = "true"
-  }
-
 
   network_interface {
     network = "default"
@@ -62,11 +57,7 @@ resource "stackpath_compute_workload" "traefik-lb" {
       key      = "cityCode"
       operator = "in"
       values = [
-        "IAD", "JFK", "ORD", "ATL", "MIA",
-        "DFW", "DEN", "SEA", "LAX", "SJC",
-        "YYZ", "AMS", "LHR", "FRA", "WAW",
-        "SIN", "GRU", "MEL", "NRT", "MAD",
-        "ARN", "HKG",
+        "IAD"
       ]
     }
   }
