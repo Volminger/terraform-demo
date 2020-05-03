@@ -79,7 +79,7 @@ resource "stackpath_compute_network_policy" "web-server" {
   instance_selector {
     key      = "role"
     operator = "in"
-    values   = ["web-server"]
+    values   = ["traefik-lb"]
   }
 
 
