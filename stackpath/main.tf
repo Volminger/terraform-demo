@@ -36,12 +36,12 @@ resource "stackpath_compute_workload" "traefik-lb" {
 
     env {
       key   = "BACKEND_1"
-      value = "http://terraform-example-elb-655058968.us-west-2.elb.amazonaws.com/"
+      value = "http://terraform-example-elb-655058968.us-west-2.elb.amazonaws.com/
     }
 
     env {
       key   = "BACKEND_2"
-      value = "http://161.35.39.237/"
+      value = "http://206.189.122.128/"
     }
   }
 
@@ -83,33 +83,34 @@ resource "stackpath_compute_network_policy" "web-server" {
     values   = ["web-server"]
   }
 
-  policy_types = ["INGRESS"]
-ingress {
-  action      = "ALLOW"
-  description = "Allow port 80 traffic from all IPs"
-  protocol {
-    tcp {
-      destination_ports = [80]
-    }
-  }
-  from {
-    ip_block {
-      cidr = "0.0.0.0/0"
-    }
-  }
-}
-}
 
-output "traefik-anycast-ip" {
-  value = replace(lookup(stackpath_compute_workload.traefik-lb.annotations, "anycast.platform.stackpath.net/subnets", ""), "/32", "")
-}
+    priority     = 100
+    policy_types = ["INGRESS", "EGRESS"]
 
-output "traefik-workload-instances" {
-  value = {
-    for instance in stackpath_compute_workload.traefik-lb.instances :
-    instance.name => {
-      "ip_address" = instance.external_ip_address
-      "phase"      = instance.phase
+    # Allow all inbound connections destined for port 80
+    ingress {
+      description = "Allow all outbound connections on both TCP and UDP"
+      action      = "ALLOW"
+      protocol {
+        tcp_udp {
+          destination_ports = [80]
+        }
+      }
+      from {
+        ip_block {
+          cidr = "0.0.0.0/0"
+        }
+      }
     }
-  }
+
+    # Allows all outbound connections to 0.0.0.0/0
+    egress {
+      description = "Allow all outbound connections on both TCP and UDP"
+      action      = "ALLOW"
+      to {
+        ip_block {
+          cidr = "0.0.0.0/0"
+        }
+      }
+}
 }
