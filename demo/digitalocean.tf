@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "instance_1" {
         # install nginx
         "sudo apt-get update",
         "sudo apt-get -y install nginx",
-        "curl https://github.com/Volminger/terraform-demo/tree/master/demo/digitalocean_instance_index.html -o index.html",
+        "curl https://raw.githubusercontent.com/Volminger/terraform-demo/master/demo/digitalocean_instance_index.html -o index.html",
         "sudo cp index.html /var/www/html/index.html"
       ]
     }
