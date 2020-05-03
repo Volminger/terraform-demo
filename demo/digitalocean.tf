@@ -1,13 +1,13 @@
 resource "digitalocean_ssh_key" "demoKey" {
   name       = "Terraform Demo"
-  public_key = var.digitalocean_ssh_public_key
+  public_key = var.aws_ssh_public_key
 }
 
 resource "digitalocean_droplet" "instance_1" {
     connection {
       user = "root"
       type = "ssh"
-      private_key = var.digitalocean_ssh_private_key
+      private_key = var.aws_ssh_private_key
       host = self.ipv4_address
       timeout = "2m"
     }
