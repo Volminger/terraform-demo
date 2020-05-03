@@ -52,14 +52,6 @@ resource "stackpath_compute_workload" "traefik-lb" {
         average_utilization = 50
       }
     }
-    deployment_scope = "cityCode"
-    selector {
-      key      = "cityCode"
-      operator = "in"
-      values = [
-        "IAD"
-      ]
-    }
   }
 }
 
