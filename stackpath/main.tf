@@ -36,7 +36,7 @@ resource "stackpath_compute_workload" "traefik-lb" {
 
     env {
       key   = "BACKEND_1"
-      value = "http://terraform-example-elb-655058968.us-west-2.elb.amazonaws.com/
+      value = "http://terraform-example-elb-655058968.us-west-2.elb.amazonaws.com/"
     }
 
     env {
