@@ -27,6 +27,14 @@ resource "aws_security_group" "terraform_demo" {
   description = "Used in the terraform"
   vpc_id      =  aws_vpc.terraform_demo.id
 
+  # SSH access from anywhere
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # HTTP access from anywhere
   ingress {
     from_port   = 80
