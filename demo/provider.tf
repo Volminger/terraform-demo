@@ -9,5 +9,5 @@ provider "stackpath" {
 }
 
 provider "digitalocean" {
-  token = var.digitalOcean-token
+  token = var.digitalOcean_token
 }

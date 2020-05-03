@@ -22,7 +22,6 @@ resource "aws_subnet" "terraform_demo" {
   map_public_ip_on_launch = true
 }
 
-# A security group for the ELB so it is accessible via the web
 resource "aws_security_group" "terraform_demo" {
   name        = "terraform_example_elb"
   description = "Used in the terraform"
@@ -47,8 +46,8 @@ resource "aws_security_group" "terraform_demo" {
 
 
 resource "aws_key_pair" "auth" {
-  key_name   = var.key_name
-  public_key = var.public_key
+  key_name   = var.aws_key_name
+  public_key = var.aws_ssh_public_key
 }
 
 resource "aws_instance" "web" {
@@ -56,7 +55,7 @@ resource "aws_instance" "web" {
     user = "ubuntu"
     host = self.public_ip
     type     = "ssh"
-    private_key = var.private_key
+    private_key = var.aws_ssh_private_key
   }
 
   instance_type = "t3a.micro"

@@ -1,12 +1,12 @@
-variable "public_key" {
+variable "aws_ssh_public_key" {
 
 }
 
-variable "private_key" {
+variable "aws_ssh_private_key" {
 
 }
 
-variable "key_name" {
+variable "aws_key_name" {
   description = "Desired name of AWS key pair"
 }
 
@@ -27,15 +27,15 @@ variable "aws_amis" {
 }
 
 
-variable "digitalOcean-token" {
+variable "digitalOcean_token" {
   default = ""
 }
 
-variable "ssh_public_key" {
+variable "digitalocean_ssh_public_key" {
   default = ""
 }
 
-variable "ssh_private_key" {
+variable "digitalocean_ssh_private_key" {
   default = ""
 }
 
