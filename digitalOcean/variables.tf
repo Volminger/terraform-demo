@@ -1,0 +1,3 @@
+variable "digitalOcean-token" {
+  default = ""
+}
