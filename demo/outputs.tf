@@ -10,7 +10,6 @@ output "load-balancer-public-ip" {
   )
 }
 
-
 output "lord_of_them_all" {
   value = "One IaC to rule them all, One IaC to find them, One IaC to bring them all and in Terraform bind them."
 }
