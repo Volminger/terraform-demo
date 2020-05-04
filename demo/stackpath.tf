@@ -1,6 +1,6 @@
-resource "stackpath_compute_workload" "traefik-lb" {
-  name = "traefik-lb"
-  slug = "traefik-lb"
+resource "stackpath_compute_workload" "load_balancer" {
+  name = "load_balancer"
+  slug = "load_balancer"
 
 
   network_interface {
@@ -8,7 +8,7 @@ resource "stackpath_compute_workload" "traefik-lb" {
   }
 
   container {
-    name = "app"
+    name = "load_balancer_container"
     # Nginx image to use for the container
     image = "scotwells/multi-cloud-traefik:latest"
     resources {
@@ -37,7 +37,6 @@ resource "stackpath_compute_workload" "traefik-lb" {
     scale_settings {
       metrics {
         metric = "cpu"
-        # scale up when CPU averages 50%
         average_utilization = 50
       }
     }
@@ -53,24 +52,23 @@ resource "stackpath_compute_workload" "traefik-lb" {
   }
 }
 
-resource "stackpath_compute_network_policy" "web-server" {
-  name        = "Allow HTTP traffic for web servers"
-  slug        = "web-servers-allow-http"
-  description = "A network policy for allowing HTTP access for instances with the web server role"
+resource "stackpath_compute_network_policy" "load_balancer" {
+  name        = "Allow all HTTP traffic for load balancer"
+  slug        = "load-balancer-servers-allow-http"
+  description = "A network policy for allowing HTTP access to load balancer"
 
   instance_selector {
     key      = "workload.platform.stackpath.net/workload-slug"
     operator = "in"
-    values   = ["traefik-lb"]
+    values   = ["load_balancer"]
   }
-
 
   priority     = 100
   policy_types = ["INGRESS", "EGRESS"]
 
   # Allow all inbound connections destined for port 80
   ingress {
-    description = "Allow all outbound connections on both TCP and UDP"
+    description = "Allow all inbound connections on both TCP and UDP on port 80"
     action      = "ALLOW"
     protocol {
       tcp_udp {
