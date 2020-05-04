@@ -50,6 +50,11 @@ resource "stackpath_compute_workload" "load-balancer" {
       ]
     }
   }
+
+  # Used to fix bug with output of public ip
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
 }
 
 resource "stackpath_compute_network_policy" "load-balancer" {
