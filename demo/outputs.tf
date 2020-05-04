@@ -1,7 +1,7 @@
 output "load-balancer-public-ip" {
   value = replace(
     lookup(
-        stackpath_compute_workload.traefik-lb.annotations,
+        stackpath_compute_workload.load-balancer.annotations,
         "anycast.platform.stackpath.net/subnets",
         ""
     ),
