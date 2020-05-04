@@ -2,6 +2,11 @@ resource "stackpath_compute_workload" "load-balancer" {
   name = "load-balancer"
   slug = "load-balancer"
 
+  annotations = {
+  # request an anycast IP, mainly to get around bug with no
+  # output for public ip on instances
+  "anycast.platform.stackpath.net" = "true"
+}
 
   network_interface {
     network = "default"
@@ -51,10 +56,6 @@ resource "stackpath_compute_workload" "load-balancer" {
     }
   }
 
-  # Used to fix bug with output of public ip
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
 }
 
 resource "stackpath_compute_network_policy" "load-balancer" {

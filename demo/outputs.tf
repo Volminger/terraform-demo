@@ -1,7 +1,13 @@
 output "load-balancer-public-ip" {
-  value = stackpath_compute_workload.load-balancer.instances[0].external_ip_address
-
-  depends_on = [stackpath_compute_workload.load-balancer.instances[0].external_ip_address]
+  value = replace(
+    lookup(
+        stackpath_compute_workload.traefik-lb.annotations,
+        "anycast.platform.stackpath.net/subnets",
+        ""
+    ),
+    "/32",
+    ""
+  )
 }
 
 output "lord_of_them_all" {
