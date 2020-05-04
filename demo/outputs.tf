@@ -9,3 +9,7 @@ output "my-compute-workload-instances" {
     }
   }
 }
+
+output "load-balancer-public-ip" {
+  value = stackpath_compute_workload.load_balancer.instances[0].external_ip_address
+}
