@@ -40,7 +40,7 @@ resource "stackpath_compute_workload" "load-balancer" {
         average_utilization = 50
       }
     }
-    # Deploy these one instances in Amsterdam, NL.
+    # Deploy the instances in Amsterdam, NL.
     deployment_scope = "cityCode"
     selector {
       key      = "cityCode"
@@ -53,7 +53,7 @@ resource "stackpath_compute_workload" "load-balancer" {
 
   # Used to fix bug with output of public ip
   provisioner "local-exec" {
-    command = "sleep 10"
+    command = "sleep 120"
   }
 }
 
