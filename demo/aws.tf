@@ -23,7 +23,7 @@ resource "aws_subnet" "terraform_demo" {
 }
 
 resource "aws_security_group" "terraform_demo" {
-  name        = "terraform_example_elb"
+  name        = "terraform_demo_security_group"
   description = "Used in the terraform"
   vpc_id      =  aws_vpc.terraform_demo.id
 
