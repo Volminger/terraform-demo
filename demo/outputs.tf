@@ -4,8 +4,8 @@ output "my-compute-workload-instances" {
   value = {
     for instance in stackpath_compute_workload.load_balancer.instances:
     instance.name => {
-      ip_address = instance.external_ip_address
-      phase      = instance.phase
+      ip_address = "${instance.external_ip_address}"
+      phase      = "${instance.phase}"
     }
   }
 }
