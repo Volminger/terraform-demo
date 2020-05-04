@@ -1,6 +1,6 @@
-resource "stackpath_compute_workload" "load_balancer" {
-  name = "load_balancer"
-  slug = "load_balancer"
+resource "stackpath_compute_workload" "load-balancer" {
+  name = "load-balancer"
+  slug = "load-balancer"
 
 
   network_interface {
@@ -8,7 +8,7 @@ resource "stackpath_compute_workload" "load_balancer" {
   }
 
   container {
-    name = "load_balancer_container"
+    name = "load-balancer-container"
     # Nginx image to use for the container
     image = "scotwells/multi-cloud-traefik:latest"
     resources {
@@ -52,7 +52,7 @@ resource "stackpath_compute_workload" "load_balancer" {
   }
 }
 
-resource "stackpath_compute_network_policy" "load_balancer" {
+resource "stackpath_compute_network_policy" "load-balancer" {
   name        = "Allow all HTTP traffic for load balancer"
   slug        = "load-balancer-servers-allow-http"
   description = "A network policy for allowing HTTP access to load balancer"
@@ -60,7 +60,7 @@ resource "stackpath_compute_network_policy" "load_balancer" {
   instance_selector {
     key      = "workload.platform.stackpath.net/workload-slug"
     operator = "in"
-    values   = ["load_balancer"]
+    values   = ["load-balancer"]
   }
 
   priority     = 100
