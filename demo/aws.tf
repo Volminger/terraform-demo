@@ -66,6 +66,7 @@ resource "aws_instance" "terraform_demo" {
     private_key = var.aws_ssh_private_key
   }
 
+
   instance_type = "t3a.micro"
 
   ami = lookup(var.aws_amis, var.aws_region)
